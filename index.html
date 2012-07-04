@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<!-- JQuery -->
+	<script src="src/lib/jquery.min.js"></script>
+	
+	<!--  JQuery UI -->
+	<script src="src/lib/jquery-ui/js/jquery-ui-1.8.21.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="src/lib/jquery-ui/css/custom-theme/jquery-ui-1.8.21.custom.css"/>
+	
+	<!-- Underscore (dependency for Backbone.js) -->
+	<script src="src/lib/underscore.js"></script>
+	
+	<!-- Backbone.js -->
+	<script src="src/lib/backbone.js"></script>
+	
+	<!-- PEG.js Parser -->
+	<script src="src/asp_parser.js"></script>
+	
+	<!-- ASP Online -->
+	<script src="src/asp_online.js"></script>
+</head>
+
+<style>
+
+#asp_input {
+	width: 25em;
+	height: 15em;
+	border-style: solid;
+	border-width: 1px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0.25em;
+}
+
+#console {
+	width: 25em;
+	height: 3em;
+	border-style: solid;
+	border-width: 1px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0.25em;
+}
+
+#control_panel {
+	width: 25em;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0.25em;
+}
+
+</style>
+
+<body>
+
+	<div id="asp_input" contenteditable="true"></div>
+	
+	<div id="console">Ready...</div>
+	
+	<div id="control_panel">
+		<input id="solve" type="button" value="solve">
+	</div>
+
+</body>
+
+
+
+</html>
