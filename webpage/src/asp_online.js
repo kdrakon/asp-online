@@ -2,6 +2,12 @@
 /**********************************************************************/
 
 /**
+ * Global variables
+ */
+var solverURL = "http://localhost:8045/solver";
+	
+	
+/**
  * ASP Logic Program model.
  */
 var logicProgramModel = Backbone.Model.extend({
@@ -90,7 +96,19 @@ var controlPanelView = Backbone.View.extend({
 	},
 	
 	executeSolver: function(){
-		alert("solving");
+		// send the program to the solver backend
+		$.ajax({
+			type : 'post',
+			url : solverURL,
+			data : { program : this.model.getLogicProgram()},
+			dataType : 'json',
+			success : function(data, textStatus, jqXHR) {
+
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("fail");
+			}
+		});
 	}
 
 });
