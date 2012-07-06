@@ -12,6 +12,9 @@ var solverURL = "http://localhost:8045/solver";
  */
 var logicProgramModel = Backbone.Model.extend({
 	
+	/* Internal properties */
+	// { program : "", parsedSyntax : "", syntaxExceptions : "", results : ""}
+	
 	/* Returns the logic program as a string */
 	getLogicProgram : function(){ 
 		return this.get("program");
@@ -23,16 +26,16 @@ var logicProgramModel = Backbone.Model.extend({
 		this.parseProgram();
 	},
 	
-	/* Use the PEG.js parser to return a parsed and syntax highlighted program */
+	/* Use the PEG.js parser to validate the program */
 	parseProgram : function(){
 		this.set({syntaxExceptions : "looking good..."});
 		var p = this.getLogicProgram();
 		try{
-			this.set({parsedSyntax : asp_parser.parse(p)});
+			//this.set({parsedSyntax : asp_parser.parse(p)});
 		}catch(e){
 			this.set({syntaxExceptions : "[" + e.line + "," + e.column + "]:" + e.message});
 		}
-	}	
+	}
 	
 });
 
@@ -54,14 +57,8 @@ var inputView = Backbone.View.extend({
 
 	/* Update the logic program in the model with the views text */
 	updateProgram : function(){
-		this.model.setLogicProgram(decodeURIComponent(this.$el.text()));
+		this.model.setLogicProgram(this.$el.val());
 		this.render();		
-	},
-	
-	/* Replace the models program with the parsed/highlighted syntax */
-	performHighlight : function(){
-		var newinput = parsePEGOutput(this.model.get("parsedSyntax"));
-		this.$el.html(newinput);
 	}
 	
 });	
@@ -95,20 +92,22 @@ var controlPanelView = Backbone.View.extend({
 		"click #solve" : "executeSolver"
 	},
 	
-	executeSolver: function(){
+	executeSolver: function(){	
 		// send the program to the solver backend
 		$.ajax({
+			model : this.model,
 			type : 'post',
 			url : solverURL,
-			data : { program : this.model.getLogicProgram()},
+			data : { program : this.model.getLogicProgram() },
 			dataType : 'json',
 			success : function(data, textStatus, jqXHR) {
-
+				this.model.set({results : data.result});
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
-				alert("fail");
+				this.model.set({results : textStatus});
 			}
 		});
+		
 	}
 
 });
@@ -157,15 +156,10 @@ $(document).ready(function(event) {
 	$("#solve").button({ icons: {primary:'ui-icon-stop'} });
 
 	// create an instance of the logic program model 
-	logicProgram = new logicProgramModel({ program : "", parsedSyntax : "", syntaxExceptions : ""});
+	logicProgram = new logicProgramModel({ program : "", parsedSyntax : "", syntaxExceptions : "", results : ""});
 	
 	// create the input view from the HTML text area and use the logic program as its backing
 	input = new inputView({	el : $("#asp_input"), model: logicProgram });
-	
-	// designate the input views model events
-	input.model.on("change:parsedSyntax", function(){
-		//input.performHighlight();
-	});
 	
 	// create the console view from the HTML text area and use the logic program as its backing
 	console = new consoleView({	el : $("#console"),	model: logicProgram	});
@@ -173,6 +167,9 @@ $(document).ready(function(event) {
 	// designate the console views model events
 	console.model.on("change:syntaxExceptions", function(){
 		console.write(console.model.get("syntaxExceptions"));
+	});
+	console.model.on("change:results", function(){
+		console.write(console.model.get("results"));
 	});
 	
 	// create the control panel view from the HTML div and use the logic program as its backing
