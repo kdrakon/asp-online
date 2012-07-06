@@ -14,6 +14,7 @@ var express = require("express");
  */
 
 // create the server using express.js
+console.log("starting server...");
 var server = express.createServer();
 // will parse requests into JSON
 server.use(express.bodyParser());
@@ -23,11 +24,16 @@ server.use(express.static('../webpage'));
 
 // handle posts of ASP programs to the server
 server.post('/solver', function(req, res){
+	
+	// the request contains the program sent from the UI
+	console.log("req: " + req.body.program);
+	var program = req.body.program;
 
-	var clingo = exec("clingo", {timeout: 10000}, function(error, stdout, stderr){
+	var clingo = exec("echo " + program + " | clingo -n 0", {timeout:10000}, function(error, stdout, stderr){
 		
 		// return the output of clingo to the webpage
 		res.send(stdout);
+		console.log(stdout);
 		
 		if (error !== null){
 			// there was an error
@@ -36,9 +42,8 @@ server.post('/solver', function(req, res){
 		}
 		
 	});
-	
-	clingo.stdin.write("test.");
-	
+
+
   
 });
 
