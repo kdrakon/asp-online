@@ -31,7 +31,7 @@ var logicProgramModel = Backbone.Model.extend({
 		this.set({syntaxExceptions : "looking good..."});
 		var p = this.getLogicProgram();
 		try{
-			//this.set({parsedSyntax : asp_parser.parse(p)});
+			this.set({parsedSyntax : asp_parser.parse(p)});
 		}catch(e){
 			this.set({syntaxExceptions : "[" + e.line + "," + e.column + "]:" + e.message});
 		}

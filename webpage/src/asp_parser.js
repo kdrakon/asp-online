@@ -113,24 +113,24 @@ asp_parser = (function(){
         result1 = parse_rules();
         if (result1 !== null) {
           result2 = [];
-          if (/^[" ""\n""%A0"]/.test(input.charAt(pos))) {
+          if (/^[" ""\n"]/.test(input.charAt(pos))) {
             result3 = input.charAt(pos);
             pos++;
           } else {
             result3 = null;
             if (reportFailures === 0) {
-              matchFailed("[\" \"\"\\n\"\"%A0\"]");
+              matchFailed("[\" \"\"\\n\"]");
             }
           }
           while (result3 !== null) {
             result2.push(result3);
-            if (/^[" ""\n""%A0"]/.test(input.charAt(pos))) {
+            if (/^[" ""\n"]/.test(input.charAt(pos))) {
               result3 = input.charAt(pos);
               pos++;
             } else {
               result3 = null;
               if (reportFailures === 0) {
-                matchFailed("[\" \"\"\\n\"\"%A0\"]");
+                matchFailed("[\" \"\"\\n\"]");
               }
             }
           }
@@ -150,24 +150,24 @@ asp_parser = (function(){
           result1 = parse_rules();
           if (result1 !== null) {
             result2 = [];
-            if (/^[" ""\n""%A0"]/.test(input.charAt(pos))) {
+            if (/^[" ""\n"]/.test(input.charAt(pos))) {
               result3 = input.charAt(pos);
               pos++;
             } else {
               result3 = null;
               if (reportFailures === 0) {
-                matchFailed("[\" \"\"\\n\"\"%A0\"]");
+                matchFailed("[\" \"\"\\n\"]");
               }
             }
             while (result3 !== null) {
               result2.push(result3);
-              if (/^[" ""\n""%A0"]/.test(input.charAt(pos))) {
+              if (/^[" ""\n"]/.test(input.charAt(pos))) {
                 result3 = input.charAt(pos);
                 pos++;
               } else {
                 result3 = null;
                 if (reportFailures === 0) {
-                  matchFailed("[\" \"\"\\n\"\"%A0\"]");
+                  matchFailed("[\" \"\"\\n\"]");
                 }
               }
             }
@@ -187,35 +187,19 @@ asp_parser = (function(){
       
       function parse_rules() {
         var result0;
-        var pos0;
         
-        pos0 = pos;
         result0 = parse_rule();
-        if (result0 !== null) {
-          result0 = (function(offset, rule) {return ["<span style='color:green'>"].concat(rule).concat(["</span>"])})(pos0, result0);
-        }
         if (result0 === null) {
-          pos = pos0;
-        }
-        if (result0 === null) {
-          pos0 = pos;
           result0 = parse_fact();
-          if (result0 !== null) {
-            result0 = (function(offset, fact) {return ["<span style='color:green'>"].concat(fact).concat(["</span>"])})(pos0, result0);
-          }
-          if (result0 === null) {
-            pos = pos0;
-          }
         }
         return result0;
       }
       
       function parse_rule() {
         var result0, result1, result2, result3, result4, result5, result6, result7;
-        var pos0, pos1;
+        var pos0;
         
         pos0 = pos;
-        pos1 = pos;
         result0 = [];
         if (input.charCodeAt(pos) === 32) {
           result1 = " ";
@@ -335,40 +319,34 @@ asp_parser = (function(){
                         result0 = [result0, result1, result2, result3, result4, result5, result6, result7];
                       } else {
                         result0 = null;
-                        pos = pos1;
+                        pos = pos0;
                       }
                     } else {
                       result0 = null;
-                      pos = pos1;
+                      pos = pos0;
                     }
                   } else {
                     result0 = null;
-                    pos = pos1;
+                    pos = pos0;
                   }
                 } else {
                   result0 = null;
-                  pos = pos1;
+                  pos = pos0;
                 }
               } else {
                 result0 = null;
-                pos = pos1;
+                pos = pos0;
               }
             } else {
               result0 = null;
-              pos = pos1;
+              pos = pos0;
             }
           } else {
             result0 = null;
-            pos = pos1;
+            pos = pos0;
           }
         } else {
           result0 = null;
-          pos = pos1;
-        }
-        if (result0 !== null) {
-          result0 = (function(offset, head, neck, body) {return head.concat(neck).concat(body).concat(["."]) })(pos0, result0[1], result0[3], result0[5]);
-        }
-        if (result0 === null) {
           pos = pos0;
         }
         return result0;
@@ -376,16 +354,8 @@ asp_parser = (function(){
       
       function parse_head() {
         var result0, result1;
-        var pos0;
         
-        pos0 = pos;
         result0 = parse_literal();
-        if (result0 !== null) {
-          result0 = (function(offset, head) {return ["<b>"].concat(head).concat(["</b>"])})(pos0, result0);
-        }
-        if (result0 === null) {
-          pos = pos0;
-        }
         if (result0 === null) {
           result0 = [];
           if (input.charCodeAt(pos) === 32) {
@@ -581,10 +551,9 @@ asp_parser = (function(){
       
       function parse_fact() {
         var result0, result1, result2, result3;
-        var pos0, pos1;
+        var pos0;
         
         pos0 = pos;
-        pos1 = pos;
         result0 = [];
         if (input.charCodeAt(pos) === 32) {
           result1 = " ";
@@ -646,24 +615,18 @@ asp_parser = (function(){
                 result0 = [result0, result1, result2, result3];
               } else {
                 result0 = null;
-                pos = pos1;
+                pos = pos0;
               }
             } else {
               result0 = null;
-              pos = pos1;
+              pos = pos0;
             }
           } else {
             result0 = null;
-            pos = pos1;
+            pos = pos0;
           }
         } else {
           result0 = null;
-          pos = pos1;
-        }
-        if (result0 !== null) {
-          result0 = (function(offset, literal) {return literal.concat(["."])})(pos0, result0[1]);
-        }
-        if (result0 === null) {
           pos = pos0;
         }
         return result0;
@@ -671,19 +634,11 @@ asp_parser = (function(){
       
       function parse_literal() {
         var result0, result1;
-        var pos0, pos1;
+        var pos0;
         
-        pos0 = pos;
         result0 = parse_atom();
-        if (result0 !== null) {
-          result0 = (function(offset, atom) {return atom})(pos0, result0);
-        }
-        if (result0 === null) {
-          pos = pos0;
-        }
         if (result0 === null) {
           pos0 = pos;
-          pos1 = pos;
           if (input.charCodeAt(pos) === 45) {
             result0 = "-";
             pos++;
@@ -699,16 +654,10 @@ asp_parser = (function(){
               result0 = [result0, result1];
             } else {
               result0 = null;
-              pos = pos1;
+              pos = pos0;
             }
           } else {
             result0 = null;
-            pos = pos1;
-          }
-          if (result0 !== null) {
-            result0 = (function(offset, atom) {return ["<span style='color:red'>", "-", "</span>"].concat(atom)})(pos0, result0[1]);
-          }
-          if (result0 === null) {
             pos = pos0;
           }
         }
@@ -717,10 +666,9 @@ asp_parser = (function(){
       
       function parse_atom() {
         var result0, result1, result2, result3, result4, result5, result6;
-        var pos0, pos1;
+        var pos0;
         
         pos0 = pos;
-        pos1 = pos;
         result0 = parse_predicate();
         if (result0 !== null) {
           result1 = [];
@@ -794,32 +742,26 @@ asp_parser = (function(){
                     result0 = [result0, result1, result2, result3, result4, result5];
                   } else {
                     result0 = null;
-                    pos = pos1;
+                    pos = pos0;
                   }
                 } else {
                   result0 = null;
-                  pos = pos1;
+                  pos = pos0;
                 }
               } else {
                 result0 = null;
-                pos = pos1;
+                pos = pos0;
               }
             } else {
               result0 = null;
-              pos = pos1;
+              pos = pos0;
             }
           } else {
             result0 = null;
-            pos = pos1;
+            pos = pos0;
           }
         } else {
           result0 = null;
-          pos = pos1;
-        }
-        if (result0 !== null) {
-          result0 = (function(offset, predicate, terms) {return predicate.concat(["("]).concat(terms).concat([")"])})(pos0, result0[0], result0[3]);
-        }
-        if (result0 === null) {
           pos = pos0;
         }
         if (result0 === null) {
@@ -1141,30 +1083,29 @@ asp_parser = (function(){
       
       function parse_term() {
         var result0, result1, result2;
-        var pos0, pos1;
+        var pos0;
         
         pos0 = pos;
-        pos1 = pos;
-        if (/^[a-z]/.test(input.charAt(pos))) {
+        if (/^[a-z0-9]/.test(input.charAt(pos))) {
           result1 = input.charAt(pos);
           pos++;
         } else {
           result1 = null;
           if (reportFailures === 0) {
-            matchFailed("[a-z]");
+            matchFailed("[a-z0-9]");
           }
         }
         if (result1 !== null) {
           result0 = [];
           while (result1 !== null) {
             result0.push(result1);
-            if (/^[a-z]/.test(input.charAt(pos))) {
+            if (/^[a-z0-9]/.test(input.charAt(pos))) {
               result1 = input.charAt(pos);
               pos++;
             } else {
               result1 = null;
               if (reportFailures === 0) {
-                matchFailed("[a-z]");
+                matchFailed("[a-z0-9]");
               }
             }
           }
@@ -1198,16 +1139,10 @@ asp_parser = (function(){
             result0 = [result0, result1];
           } else {
             result0 = null;
-            pos = pos1;
+            pos = pos0;
           }
         } else {
           result0 = null;
-          pos = pos1;
-        }
-        if (result0 !== null) {
-          result0 = (function(offset, term) {return ["<span style='color:blue'>"].concat(term).concat(["</span>"])})(pos0, result0);
-        }
-        if (result0 === null) {
           pos = pos0;
         }
         return result0;
@@ -1215,10 +1150,9 @@ asp_parser = (function(){
       
       function parse_variable() {
         var result0, result1, result2;
-        var pos0, pos1;
+        var pos0;
         
         pos0 = pos;
-        pos1 = pos;
         if (/^[A-Za-z]/.test(input.charAt(pos))) {
           result1 = input.charAt(pos);
           pos++;
@@ -1272,16 +1206,10 @@ asp_parser = (function(){
             result0 = [result0, result1];
           } else {
             result0 = null;
-            pos = pos1;
+            pos = pos0;
           }
         } else {
           result0 = null;
-          pos = pos1;
-        }
-        if (result0 !== null) {
-          result0 = (function(offset, variable) {return ["<span style='color:yellow'>"].concat(variable).concat(["</span>"])})(pos0, result0);
-        }
-        if (result0 === null) {
           pos = pos0;
         }
         return result0;
@@ -1289,10 +1217,9 @@ asp_parser = (function(){
       
       function parse_predicate() {
         var result0, result1, result2;
-        var pos0, pos1;
+        var pos0;
         
         pos0 = pos;
-        pos1 = pos;
         if (/^[a-z]/.test(input.charAt(pos))) {
           result1 = input.charAt(pos);
           pos++;
@@ -1346,16 +1273,10 @@ asp_parser = (function(){
             result0 = [result0, result1];
           } else {
             result0 = null;
-            pos = pos1;
+            pos = pos0;
           }
         } else {
           result0 = null;
-          pos = pos1;
-        }
-        if (result0 !== null) {
-          result0 = (function(offset, predicate) {return ["<span style='color:purple'>"].concat(predicate).concat(["</span>"])})(pos0, result0);
-        }
-        if (result0 === null) {
           pos = pos0;
         }
         return result0;
@@ -1492,3 +1413,7 @@ asp_parser = (function(){
   
   return result;
 })();
+      
+module.exports = {
+	parser : asp_parser
+};     

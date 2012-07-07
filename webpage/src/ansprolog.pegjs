@@ -8,42 +8,42 @@
 
 
 start
-    = (rules [" ""\n""%A0"]*)*
+    = (rules [" ""\n"]*)*
 
 rules
-    = rule:rule {return ["<span style='color:green'>"].concat(rule).concat(["</span>"])}
-    / fact:fact {return ["<span style='color:green'>"].concat(fact).concat(["</span>"])}
+    = rule
+    / fact
     
 rule
-    = " "* head:(head) " "* neck:(":-") " "* body:(body) " "* "." {return head.concat(neck).concat(body).concat(["."]) }
+    = " "* (head) " "* (":-") " "* (body) " "* "."
 
 head
-    = head:literal {return ["<b>"].concat(head).concat(["</b>"])}
+    = literal
     / " "*
 
 body
-    = (not:"not")? (" "*)(literal:literal)" "* ((" "*) (",") (" "*) (body:body))?
+    = ("not")? (" "*)(literal)" "* ((" "*) (",") (" "*) (body))?
 
 fact
-    = " "* literal:literal " "* "." {return literal.concat(["."])}
+    = " "* literal " "* "."
 
 literal
-    = atom:atom {return atom}
-    / "-" atom:atom {return ["<span style='color:red'>", "-", "</span>"].concat(atom)}
+    = atom
+    / "-" atom
 
 atom
-    = predicate:predicate " "* "(" terms:terms ")" " "* {return predicate.concat(["("]).concat(terms).concat([")"])}
+    = predicate " "* "(" terms ")" " "*
     / term
 
 terms
-    = (" "* term:term " "*) (" "* "," " "* terms)?
-    / (" "* variable:variable " "*) (" "* "," " "* terms)?
+    = (" "* term " "*) (" "* "," " "* terms)?
+    / (" "* variable " "*) (" "* "," " "* terms)?
 
 term
-    = term:([a-z]+ [0-9a-zA-Z]*) {return ["<span style='color:blue'>"].concat(term).concat(["</span>"])}
+    = ([a-z0-9]+ [0-9a-zA-Z]*)
 
 variable
-    = variable:([A-Za-z]+ [0-9a-zA-Z]*) {return ["<span style='color:yellow'>"].concat(variable).concat(["</span>"])}
+    = ([A-Za-z]+ [0-9a-zA-Z]*)
 
 predicate
-    = predicate:([a-z]+ [0-9a-zA-Z]*) {return ["<span style='color:purple'>"].concat(predicate).concat(["</span>"])}
+    = ([a-z]+ [0-9a-zA-Z]*)
