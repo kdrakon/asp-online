@@ -28,7 +28,7 @@ var logicProgramModel = Backbone.Model.extend({
 	
 	/* Use the PEG.js parser to validate the program */
 	parseProgram : function(){
-		this.set({syntaxExceptions : "looking good..."});
+		this.set({syntaxExceptions : "Looking good..."});
 		var p = this.getLogicProgram();
 		try{
 			this.set({parsedSyntax : asp_parser.parse(p)});
