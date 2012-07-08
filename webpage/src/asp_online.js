@@ -115,31 +115,6 @@ var controlPanelView = Backbone.View.extend({
 /**********************************************************************/
 
 /**
- * Helper Functions
- */
-	
-/**
- * Parses output of PEG parser into a better string.
- */
-function parsePEGOutput(input){
-	var result = "";
-	_.each(input, function(i){
-		if ($.isArray(i)){
-			result += " " + parsePEGOutput(i) + " ";
-		}else{
-			if (i == ""){
-				result += " ";
-			}else{
-				result += i;
-			}
-		}
-	});
-	return result;
-}
-
-/**********************************************************************/
-
-/**
  * Page Initialisation
  */
 	
@@ -153,7 +128,12 @@ $(document).ready(function(event) {
 	/*
 	 * Prepare UI
 	 */
-	$("#solve").button({ icons: {primary:'ui-icon-stop'} });
+	$("#solve").button({ icons: {primary:'ui-icon-play'} });
+	$("#clear").button({ icons: {primary:'ui-icon-trash'} });
+	
+	/*
+	 * Setup Backbone elements
+	 */
 
 	// create an instance of the logic program model 
 	logicProgram = new logicProgramModel({ program : "", parsedSyntax : "", syntaxExceptions : "", results : ""});

@@ -8,7 +8,7 @@
 	
 	<!--  JQuery UI -->
 	<script src="src/lib/jquery-ui/js/jquery-ui-1.8.21.custom.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="src/lib/jquery-ui/css/custom-theme/jquery-ui-1.8.21.custom.css"/>
+	<link rel="stylesheet" type="text/css" href="src/lib/jquery-ui/css/dot-luv/jquery-ui-1.8.21.custom.css"/>
 	
 	<!-- Underscore (dependency for Backbone.js) -->
 	<script src="src/lib/underscore.js"></script>
@@ -25,54 +25,53 @@
 
 <style>
 
-#asp {
+#maindiv {
 	width: 25em;
-	height: 15em;
 	margin-left: auto;
 	margin-right: auto;
-	
+	font-size: 1em;
 }
 
 #asp_input {
-	width: 95%;
-	height: 95%;
-	border-style: solid;
-	border-width: 1px;
-	padding: 0.25em;
-}
-
-#console {
 	width: 25em;
-	height: auto;
+	height: 15em;
 	border-style: solid;
 	border-width: 1px;
 	margin-left: auto;
-	margin-right: auto;
+	margin-right: auto;	
 	padding: 0.25em;
 }
 
 #control_panel {
 	width: 25em;
+	padding: 0.25em;
+	font-size: 0.5em;
+}
+
+#console {
+	width: 25em;
+	height: auto;
 	margin-left: auto;
 	margin-right: auto;
-	padding: 0.25em;
+	padding: 0.25em;	
 }
 
 </style>
 
 <body>
+	
+	<div id="maindiv">
 
-	<div id="asp">
-		<textarea id="asp_input" contenteditable="true">a :- not b. b :- not a.</textarea>
+		<textarea id="asp_input">a :- not b. b :- not a.</textarea>
+		
+		<div id="control_panel">
+			<span id="solve">Solve</span>
+			<span id="clear">Clear</span>
+		</div>
+		
+		<div id="console">Ready...</div>
+	
 	</div>
-	
-	<div id="control_panel">
-		<input id="solve" type="button" value="solve">
-	</div>
-	
-	<div id="console">Ready...</div>
-	
-
 
 </body>
 
