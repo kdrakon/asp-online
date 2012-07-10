@@ -25,54 +25,49 @@
 
 <style>
 
-#maindiv {
-	width: 25em;
-	margin-left: auto;
-	margin-right: auto;
+#input {
+	float:left;
 	font-size: 1em;
+	width:25%;
 }
 
 #asp_input {
-	width: 25em;
-	height: 15em;
+	resize: none;
 	border-style: solid;
-	border-width: 1px;
-	margin-left: auto;
-	margin-right: auto;	
+	height: 25em;
+	width: 90%;
 	padding: 0.25em;
 }
 
 #control_panel {
-	width: 25em;
 	padding: 0.25em;
 	font-size: 0.5em;
 }
 
-#console {
-	width: 25em;
-	height: auto;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 0.25em;	
+#output {
+	width: 70%;
+	margin-left: 25%;
+	padding: 1em;
+	overflow: auto;
 }
 
 </style>
 
 <body>
-	
-	<div id="maindiv">
+
+	<div id="input">
 
 		<textarea id="asp_input">a :- not b. b :- not a.</textarea>
 		
 		<div id="control_panel">
 			<span id="solve">Solve</span>
-			<span id="clear">Clear</span>
+			<span id="clear">Clear/Reset</span>
 		</div>
-		
-		<div id="console">Ready...</div>
 	
 	</div>
-
+	
+	<div id="output">Ready...</div>
+	
 </body>
 
 

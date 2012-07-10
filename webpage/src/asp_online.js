@@ -5,6 +5,7 @@
  * Global variables
  */
 var solverURL = "http://localhost:8045/solver";
+var DEFAULT_PROGRAM = "a :- not b. b :- not a.";
 	
 	
 /**
@@ -89,7 +90,8 @@ var controlPanelView = Backbone.View.extend({
 	
 	/* List of event handlers for the control panel */
 	events: {
-		"click #solve" : "executeSolver"
+		"click #solve" : "executeSolver",
+		"click #clear" : "clearData"
 	},
 	
 	executeSolver: function(){	
@@ -108,6 +110,12 @@ var controlPanelView = Backbone.View.extend({
 			}
 		});
 		
+	},
+	
+	clearData : function(){
+		// clear data from the model (inputs, outputs)
+		this.model.clear();
+		this.model.set({ program : DEFAULT_PROGRAM });
 	}
 
 });
@@ -126,9 +134,10 @@ var controlPanel;
 $(document).ready(function(event) {
 	
 	/*
-	 * Prepare UI
+	 * Prepare UI and JQuery Event handlers
 	 */
-	$("#solve").button({ icons: {primary:'ui-icon-play'} });
+	
+	$("#solve").button({ icons: {primary:'ui-icon-play'} });	
 	$("#clear").button({ icons: {primary:'ui-icon-trash'} });
 	
 	/*
@@ -141,8 +150,13 @@ $(document).ready(function(event) {
 	// create the input view from the HTML text area and use the logic program as its backing
 	input = new inputView({	el : $("#asp_input"), model: logicProgram });
 	
+	// if the model changes (externally perhaps) then always perform the below
+	input.model.on("change", function(){
+		//input.updateProgram();
+	});
+	
 	// create the console view from the HTML text area and use the logic program as its backing
-	console = new consoleView({	el : $("#console"),	model: logicProgram	});
+	console = new consoleView({	el : $("#output"),	model: logicProgram	});
 	
 	// designate the console views model events
 	console.model.on("change:syntaxExceptions", function(){
@@ -154,7 +168,6 @@ $(document).ready(function(event) {
 	
 	// create the control panel view from the HTML div and use the logic program as its backing
 	controlPanel = new controlPanelView({ el: $("#control_panel"), model: logicProgram});
-
 	
 });
  
