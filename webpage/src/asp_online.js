@@ -47,7 +47,7 @@ var inputView = Backbone.View.extend({
 	
 	/* Re-render the syntax as the user types it in. */
 	render: function(){
-		
+		this.$el.val(this.model.get("program"));
 		return this;
 	},
 
@@ -58,8 +58,7 @@ var inputView = Backbone.View.extend({
 
 	/* Update the logic program in the model with the views text */
 	updateProgram : function(){
-		this.model.setLogicProgram(this.$el.val());
-		this.render();		
+		this.model.setLogicProgram(this.$el.val());		
 	}
 	
 });	
@@ -71,7 +70,9 @@ var consoleView = Backbone.View.extend({
 	
 	/* Render the console windows output buffer */
 	render: function(){
+		this.$el.hide();
 		this.$el.html(this.model.get("output"));
+		this.$el.slideDown("slow");
 		return this;
 	},
 	
@@ -115,7 +116,7 @@ var controlPanelView = Backbone.View.extend({
 	clearData : function(){
 		// clear data from the model (inputs, outputs)
 		this.model.clear();
-		this.model.set({ program : DEFAULT_PROGRAM });
+		this.model.setLogicProgram(DEFAULT_PROGRAM);
 	}
 
 });
@@ -152,7 +153,7 @@ $(document).ready(function(event) {
 	
 	// if the model changes (externally perhaps) then always perform the below
 	input.model.on("change", function(){
-		//input.updateProgram();
+		input.render();
 	});
 	
 	// create the console view from the HTML text area and use the logic program as its backing
@@ -168,6 +169,9 @@ $(document).ready(function(event) {
 	
 	// create the control panel view from the HTML div and use the logic program as its backing
 	controlPanel = new controlPanelView({ el: $("#control_panel"), model: logicProgram});
+	
+	// call the control panels clear method upon loading
+	controlPanel.clearData();
 	
 });
  

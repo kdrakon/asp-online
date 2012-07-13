@@ -101,7 +101,7 @@ server.post('/solver', function(req, res){
 	} else {
 		
 		// not enough processes allowed, so inform the client
-		res.send({result :"Server busy"});
+		res.send({result :"Server busy. Please try again."});
 		
 	}
   
