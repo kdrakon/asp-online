@@ -25,10 +25,52 @@
 
 <style>
 
+body {
+	margin: 0;
+}
+
+.shadow {
+	box-shadow: 0px 2px 5px #888888;
+}
+
+.crossbar {
+	height: 2em;
+	background-color: #333333;
+	position:relative;
+	z-index: 200;
+}
+
+.titlebar {
+	margin: 0px;
+	overflow: hidden;
+	font-size: 2em;
+	background-color: #F4F4F4;
+	padding: 0.3em 0.5em;
+	position:relative;
+	z-index: 100;
+}
+
 #input {
 	float:left;
 	font-size: 1em;
-	width:25%;
+	height: 25em;
+	width: 20em;
+	padding: 1em;
+	position:relative;
+	z-index: 200;
+	background-image: linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
+	background-image: -o-linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
+	background-image: -moz-linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
+	background-image: -webkit-linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
+	background-image: -ms-linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.23, rgb(219,219,219)),
+		color-stop(0.5, rgb(57,118,158))
+	);
 }
 
 #asp_input {
@@ -45,17 +87,22 @@
 }
 
 #output {
-	width: 70%;
-	margin-left: 25%;
+	font-size: 1.5em;
+	width: 30em;
 	padding: 1em;
 	overflow: auto;
+	background-color: white;
+	padding: 1em;
 }
 
 </style>
 
 <body>
 
-	<div id="input">
+	<div class="crossbar shadow"></div>	
+	<div class="titlebar shadow">ASP Online</div>	
+
+	<div id="input" class="shadow">
 
 		<textarea id="asp_input">a :- not b. b :- not a.</textarea>
 		
