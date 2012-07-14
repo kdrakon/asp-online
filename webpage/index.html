@@ -3,6 +3,14 @@
 <html>
 
 <head>
+	<title>ASP Online</title>
+
+	<!-- Internal CSS Specification -->
+	<link href='asp_online.css' rel='stylesheet' type='text/css'>
+
+	<!-- Google Web fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Ruda' rel='stylesheet' type='text/css'>
+
 	<!-- JQuery -->
 	<script src="src/lib/jquery.min.js"></script>
 	
@@ -23,97 +31,36 @@
 	<script src="src/asp_online.js"></script>
 </head>
 
-<style>
-
-body {
-	margin: 0;
-}
-
-.shadow {
-	box-shadow: 0px 2px 5px #888888;
-}
-
-.crossbar {
-	height: 2em;
-	background-color: #333333;
-	position:relative;
-	z-index: 200;
-}
-
-.titlebar {
-	margin: 0px;
-	overflow: hidden;
-	font-size: 2em;
-	background-color: #F4F4F4;
-	padding: 0.3em 0.5em;
-	position:relative;
-	z-index: 100;
-}
-
-#input {
-	float:left;
-	font-size: 1em;
-	height: 25em;
-	width: 20em;
-	padding: 1em;
-	position:relative;
-	z-index: 200;
-	background-image: linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
-	background-image: -o-linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
-	background-image: -moz-linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
-	background-image: -webkit-linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
-	background-image: -ms-linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
-	
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.23, rgb(219,219,219)),
-		color-stop(0.5, rgb(57,118,158))
-	);
-}
-
-#asp_input {
-	resize: none;
-	border-style: solid;
-	height: 25em;
-	width: 90%;
-	padding: 0.25em;
-}
-
-#control_panel {
-	padding: 0.25em;
-	font-size: 0.5em;
-}
-
-#output {
-	font-size: 1.5em;
-	width: 30em;
-	padding: 1em;
-	overflow: auto;
-	background-color: white;
-	padding: 1em;
-}
-
-</style>
-
 <body>
 
 	<div class="crossbar shadow"></div>	
-	<div class="titlebar shadow">ASP Online</div>	
+	<div class="titlebar shadow">ASP Online</div>
+	
+	<section class="infosection">
+		<article class="infoarticle">
+			<header class="infoheader">About</header>
+			Want to try out some Answer Set Programming (ASP)? <em>ASP Online</em> is a web-based and interactive interface to the <b>Potassco</b> Answer Set Programming tool, <b>oclingo</b>.
+		</article>
+		<article class="infoarticle">
+			<header class="infoheader">Credits</header>
+			The web UI & Backend Server were created by myself, <em>Sean Policarpio</em>. All ASP reasoning is performed on the server using the Potassco Answer Set Programming Tools by the University of Potsdam [<a href="http://sourceforge.net/projects/potassco/">http://sourceforge.net/projects/potassco/</a>]
+		</article>
+	</section>
 
 	<div id="input" class="shadow">
 
 		<textarea id="asp_input">a :- not b. b :- not a.</textarea>
 		
-		<div id="control_panel">
+		<menu id="control_panel">
 			<span id="solve">Solve</span>
 			<span id="clear">Clear/Reset</span>
-		</div>
+		</menu>
 	
 	</div>
 	
 	<div id="output">Ready...</div>
+	
+	<footer>Powered by Node.js</footer>
 	
 </body>
 
