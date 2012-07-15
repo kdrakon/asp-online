@@ -1,0 +1,99 @@
+
+body {
+	margin: 0;
+	font-family: 'Ruda', arial;
+}
+
+.shadow {
+	box-shadow: 1px 2px 5px #888888;
+}
+
+.crossbar {
+	height: 1em;
+	background-color: #333333;
+	position:relative;
+	z-index: 200;
+}
+
+.titlebar {
+	margin: 0px;
+	overflow: hidden;
+	background-color: #F4F4F4;
+	font-size: 3em;
+	padding: 0.3em 0.5em;
+	position:relative;
+	z-index: 100;
+}
+
+.infosection {
+	padding: 1.5em;
+	overflow: auto;
+	height: 10em;
+	width: 40em;
+}
+
+.infoarticle {
+	padding: 0.3em;
+	clear: both;
+}
+
+.infoheader {
+	font-size: 1.5em;
+	margin-right: 1em;
+	float:left;
+	width: 5em;
+	text-align: right;
+}
+
+#input {
+	float:left;
+	font-size: 1em;
+	height: 25em;
+	width: 20em;
+	padding: 1em;
+	position: relative;
+	z-index: 200;
+	background-image: linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
+	background-image: -o-linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
+	background-image: -moz-linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
+	background-image: -webkit-linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);
+	background-image: -ms-linear-gradient(bottom, rgb(219,219,219) 23%, rgb(57,118,158) 50%);	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.23, rgb(219,219,219)),
+		color-stop(0.5, rgb(57,118,158))
+	);
+}
+
+#asp_input {
+	resize: none;
+	border-style: solid;
+	height: 25em;
+	width: 90%;
+	padding: 0.25em;
+}
+
+#control_panel {
+	padding: 0.25em;
+	font-size: 0.5em;
+}
+
+#output {
+	font-size: 1.5em;
+	padding: 1em;
+	height: 15em;
+	overflow: auto;
+	background-color: white;
+	padding: 1em;
+}
+
+footer {
+	clear: both;
+	width: 80%;
+	margin: auto;
+	padding: 1em;	
+	text-align: right;
+	font-size: 0.7em;
+}
